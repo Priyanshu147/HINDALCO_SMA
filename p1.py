@@ -51,10 +51,9 @@ data['SMA_50'] = data['close'].rolling(window=50).mean()  # Long-term (50-day SM
 # Create signals based on SMA crossover
 data['Signal'] = 0  # Default is no position
 data.loc[10:, 'Signal'] = np.where(data['SMA_10'][10:] > data['SMA_50'][10:], 1, -1)  # Buy (1) / Sell (-1)
-# Shift signals to capture the moment of crossover
-data['Position'] = data['Signal'].shift(1)
 
-# Calculate strategy performance
+
+
 data['Returns'] = data['close'].pct_change()
 
 print(data.to_string())
